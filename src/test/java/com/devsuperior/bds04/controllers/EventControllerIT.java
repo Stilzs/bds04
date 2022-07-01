@@ -87,7 +87,8 @@ public class EventControllerIT {
 		result.andExpect(jsonPath("$.url").value("https://expoxp.com.br"));
 		result.andExpect(jsonPath("$.cityId").value(1L));
 	}
-
+	
+	//insert deve inserir o recurso quando o administrador estiver logado e os dados corretos
 	@Test
 	public void insertShouldInsertResourceWhenAdminLoggedAndCorrectData() throws Exception {
 
@@ -132,7 +133,8 @@ public class EventControllerIT {
 		result.andExpect(jsonPath("$.errors[0].fieldName").value("name"));
 		result.andExpect(jsonPath("$.errors[0].message").value("Campo requerido"));
 	}
-
+	
+	//VER DEPOIS
 	@Test
 	public void insertShouldReturn422WhenAdminLoggedAndPastDate() throws Exception {
 
