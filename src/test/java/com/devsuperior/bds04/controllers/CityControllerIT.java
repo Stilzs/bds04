@@ -46,7 +46,8 @@ public class CityControllerIT {
 		adminUsername = "bob@gmail.com";
 		adminPassword = "123456";
 	}
-
+	
+	//insert deve retornar 401 quando nenhum usuário estiver logado
 	@Test
 	public void insertShouldReturn401WhenNoUserLogged() throws Exception {
 
@@ -62,6 +63,7 @@ public class CityControllerIT {
 		result.andExpect(status().isUnauthorized());
 	}
 	
+	//insert deve retornar 403 quando o Client estiver logado
 	@Test
 	public void insertShouldReturn403WhenClientLogged() throws Exception {
 
@@ -80,6 +82,7 @@ public class CityControllerIT {
 		result.andExpect(status().isForbidden());
 	}
 	
+	//deve inserir o recurso quando o administrador estiver logado e os dados corretos
 	@Test
 	public void insertShouldInsertResourceWhenAdminLoggedAndCorrectData() throws Exception {
 
@@ -99,7 +102,8 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$.id").exists());
 		result.andExpect(jsonPath("$.name").value("Recife"));
 	}
-
+	
+	//deve retornar 422 quando o administrador estiver logado e o nome em branco
 	@Test
 	public void insertShouldReturn422WhenAdminLoggedAndBlankName() throws Exception {
 
@@ -119,7 +123,8 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$.errors[0].fieldName").value("name"));
 		result.andExpect(jsonPath("$.errors[0].message").value("Campo requerido"));
 	}
-
+	
+	//deve retornar todos os recursos classificados por nome
 	@Test
 	public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
 		
